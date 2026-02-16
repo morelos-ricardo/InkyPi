@@ -211,8 +211,6 @@ create_venv(){
   $VENV_PATH/bin/python -m pip install --upgrade pip setuptools wheel > /dev/null
   $VENV_PATH/bin/python -m pip install -r $PIP_REQUIREMENTS_FILE -qq > /dev/null &
   show_loader "\tInstalling python dependencies. "
-
-
 }
 
 install_app_service() {
