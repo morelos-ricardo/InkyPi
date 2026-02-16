@@ -46,7 +46,7 @@ PIP_REQUIREMENTS_FILE="$SCRIPT_DIR/requirements.txt"
 # empty means no WS support required, otherwise we expect the type of display
 # as per the WS naming convention.
 WS_TYPE=""
-WS_REQUIREMENTS_FILE="$SCRIPT_DIR/ws-requirements.txt"
+
 
 # Parse the arguments, looking for the -W option.
 parse_arguments() {
@@ -212,12 +212,6 @@ create_venv(){
   $VENV_PATH/bin/python -m pip install -r $PIP_REQUIREMENTS_FILE -qq > /dev/null &
   show_loader "\tInstalling python dependencies. "
 
-  # do additional dependencies for Waveshare support.
-  if [[ -n "$WS_TYPE" ]]; then
-    echo "Adding additional dependencies for waveshare to the python virtual environment. "
-    $VENV_PATH/bin/python -m pip install -r $WS_REQUIREMENTS_FILE > ws_pip_install.log &
-    show_loader "\tInstalling additional Waveshare python dependencies. "
-  fi
 
 }
 
