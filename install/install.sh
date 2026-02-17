@@ -206,7 +206,7 @@ setup_earlyoom_service() {
 }
 
 create_venv(){
-  echo "Creating python virtual environment. "
+  echo "Creating python virtual environment. create_venv() function running.  "
   python3 -m venv "$VENV_PATH"
   $VENV_PATH/bin/python -m pip install --upgrade pip setuptools wheel > /dev/null
   $VENV_PATH/bin/python -m pip install -r $PIP_REQUIREMENTS_FILE -qq > /dev/null &
@@ -288,7 +288,7 @@ start_service() {
 
 install_src() {
   # Check if an existing installation is present
-  echo "Installing $APPNAME to $INSTALL_PATH"
+  echo "Installing $APPNAME to $INSTALL_PATH (function install_src)"
   if [[ -d $INSTALL_PATH ]]; then
     rm -rf "$INSTALL_PATH" > /dev/null
     show_loader "\tRemoving existing installation found at $INSTALL_PATH"
@@ -301,6 +301,7 @@ install_src() {
 }
 
 install_cli() {
+  echo "Install_cli funcion i.e. installint copying and making executable inkypi-plugin"
   cp -r "$SCRIPT_DIR/cli" "$INSTALL_PATH/"
   sudo chmod +x "$INSTALL_PATH/cli/"*
 }
