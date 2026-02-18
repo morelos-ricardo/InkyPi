@@ -13,10 +13,10 @@ if __name__ == '__main__':
     refresh_task.start()
 
     # display default inkypi image on startup
-    if device_config.get_config("startup") is True:       
-        img = generate_startup_image(device_config.get_resolution())
-        display_manager.display_image(img)
-        device_config.update_value("startup", False, write=True)
+      
+    img = generate_startup_image(device_config.get_resolution())
+    display_manager.display_image(img)
+    device_config.update_value("startup", False, write=True)
 
     finally:
         refresh_task.stop()
