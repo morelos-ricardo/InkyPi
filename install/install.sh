@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# =============================works?================================================
+# ============================WORKS?=============================================
 # Script Name: install.sh
 # Description: This script automates the installation of InkyPI and creation of
 #              the InkyPI service.
@@ -46,7 +46,7 @@ PIP_REQUIREMENTS_FILE="$SCRIPT_DIR/requirements.txt"
 # empty means no WS support required, otherwise we expect the type of display
 # as per the WS naming convention.
 WS_TYPE=""
-
+WS_REQUIREMENTS_FILE="$SCRIPT_DIR/ws-requirements.txt"
 
 # Parse the arguments, looking for the -W option.
 parse_arguments() {
@@ -206,11 +206,19 @@ setup_earlyoom_service() {
 }
 
 create_venv(){
-  echo "Creating python virtual environment. create_venv() function running.  "
+  echo "Creating python virtual environment. "
   python3 -m venv "$VENV_PATH"
   $VENV_PATH/bin/python -m pip install --upgrade pip setuptools wheel > /dev/null
   $VENV_PATH/bin/python -m pip install -r $PIP_REQUIREMENTS_FILE -qq > /dev/null &
   show_loader "\tInstalling python dependencies. "
+
+  # do additional dependencies for Waveshare support.
+  if [[ -n "$WS_TYPE" ]]; then
+    echo "Adding additional dependencies for waveshare to the python virtual environment. "
+    $VENV_PATH/bin/python -m pip install -r $WS_REQUIREMENTS_FILE > ws_pip_install.log &
+    show_loader "\tInstalling additional Waveshare python dependencies. "
+  fi
+
 }
 
 install_app_service() {
@@ -288,7 +296,7 @@ start_service() {
 
 install_src() {
   # Check if an existing installation is present
-  echo "Installing $APPNAME to $INSTALL_PATH (function install_src)"
+  echo "Installing $APPNAME to $INSTALL_PATH"
   if [[ -d $INSTALL_PATH ]]; then
     rm -rf "$INSTALL_PATH" > /dev/null
     show_loader "\tRemoving existing installation found at $INSTALL_PATH"
@@ -301,7 +309,6 @@ install_src() {
 }
 
 install_cli() {
-  echo "Install_cli funcion i.e. installint copying and making executable inkypi-plugin"
   cp -r "$SCRIPT_DIR/cli" "$INSTALL_PATH/"
   sudo chmod +x "$INSTALL_PATH/cli/"*
 }
