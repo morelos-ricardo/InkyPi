@@ -1,8 +1,9 @@
-
+import logging
 from inky.auto import auto
 from display.abstract_display import AbstractDisplay
 
 
+logger = logging.getLogger(__name__)
 
 class InkyDisplay(AbstractDisplay):
 
@@ -52,11 +53,12 @@ class InkyDisplay(AbstractDisplay):
             ValueError: If no image is provided.
         """
 
-
+        logger.info("Displaying image to Inky display.")
         if not image:
             raise ValueError(f"No image provided.")
 
         # Display the image on the Inky display
         inky_saturation = self.device_config.get_config('image_settings').get("inky_saturation", 0.5)
+        logger.info(f"Inky Saturation: {inky_saturation}")
         self.inky_display.set_image(image, saturation=inky_saturation)
         self.inky_display.show()
