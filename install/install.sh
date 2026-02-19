@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# =============================================================================
+# =============================works?================================================
 # Script Name: install.sh
 # Description: This script automates the installation of InkyPI and creation of
 #              the InkyPI service.
