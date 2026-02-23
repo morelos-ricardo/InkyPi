@@ -116,9 +116,9 @@ def generate_startup_image(dimensions=(800,480)):
     image_draw = ImageDraw.Draw(image)
 
     title_font_size = width * 0.07
-    image_draw.text((width/2, height/2), "Gracias Compadre", anchor="mm", fill=text_color, font=get_font("Jost", title_font_size))
+    image_draw.text((width/2, height/2), "Bendito sea Dios", anchor="mm", fill=text_color, font=get_font("Jost", title_font_size))
 
-    text = f"guapetón"
+    text = f"taaaaaaaantas"
     text_font_size = width * 0.032
 
     # Draw the instructions
@@ -126,7 +126,7 @@ def generate_startup_image(dimensions=(800,480)):
     image_draw.text((width/2, y_text), text, anchor="mm", fill=text_color, font=get_font("Jost", text_font_size))
 
     # Draw the IP on a line below
-    ip_text = f"el que lo lea"
+    ip_text = f"cosas buenas"
     ip_text_font_size = width * 0.032
     bbox = image_draw.textbbox((0, 0), text, font=get_font("Jost", text_font_size))
     text_height = bbox[3] - bbox[1]
